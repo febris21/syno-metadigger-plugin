@@ -161,7 +161,7 @@ def _regex_extension(strategy: str, expr: str, source: str):
                 "genre": "",
                 "actor": item['actors'],
                 "writer": [],
-                "director": "",
+                "director": [],
                 "extra": {
                     "[plugin_id]": {
                         "rating": {
