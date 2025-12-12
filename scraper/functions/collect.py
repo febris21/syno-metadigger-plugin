@@ -1,8 +1,10 @@
 """The implementation of the collect function."""
 import ast
+import json
 import logging
 import re
 import time
+from datetime import datetime
 from typing import Any
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
@@ -86,6 +88,8 @@ def _render_str(tmpl: str, source, etree):
             result = _xpath_find(finder[3:], expr, etree)
         elif finder.startswith("re_"):
             result = _regex_match(finder[3:], expr, source)
+        elif finder.startswith("ex_"):
+            result = _regex_extension(finder[3:], expr, source)
     elif isinstance(source, dict) and finder == "get":
         result = source.get(expr)
 
@@ -138,6 +142,40 @@ def _regex_match(strategy: str, expr: str, source: str):
         return matches.group(1) if matches else None
     elif strategy == "matches":
         return list(dict.fromkeys(pattern.findall(source)))
+    return None
+
+def _regex_extension(strategy: str, expr: str, source: str):
+    """Match strings in a source string using regex."""
+    if strategy == "digger":
+        json_body = json.loads(source)
+        json_data = json_body['data']
+        movies = []
+        for item in json_data:
+            dt = datetime.fromisoformat(item['release_date'].replace("Z", "+00:00"))
+            movie = {
+                'title': item['title'],
+                'tagline': item['id'],
+                'original_available': dt.strftime("%Y-%m-%d"),
+                'summary': item['title'],
+                "certificate": "",
+                "genre": "",
+                "actor": item['actors'],
+                "writer": [],
+                "director": "",
+                "extra": {
+                    "[plugin_id]": {
+                        "rating": {
+                            "[plugin_id]": item['score']
+                        },
+                        "poster": item['thumb_url'],
+                        "backdrop": item['cover_url']
+                    }
+                }
+            }
+            movies.append(movie)
+        return list(movies)
+    elif strategy == "none":
+        return "none"
     return None
 
 

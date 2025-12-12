@@ -1,18 +1,18 @@
 {
   "type": "movie",
-  "site": "metatube.zhanghao.org.cn",
+  "site": "metadigger.zhanghao.org.cn",
   "steps": [
     {
       "doh": {
-        "host": "metatube.zhanghao.org.cn"
+        "host": "metadigger.zhanghao.org.cn"
       }
     },
     {
       "http": {
-        "url": "https://metatube.zhanghao.org.cn/v1/movies/search?q={title}",
+        "url": "https://metadigger.zhanghao.org.cn/v1/movies/search/{title}",
         "method": "GET",
         "headers": {
-          "Host": "metatube.zhanghao.org.cn",
+          "Host": "metadigger.zhanghao.org.cn",
           "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"
         },
         "result": "metadata"
@@ -22,33 +22,14 @@
       "collect": {
         "source": "metadata",
         "into": {
-          "ids": "['re_matches', '\"id\":']"
+          "data_array": "['ex_digger', '']"
         }
-      }
-    },
-     {
-      "loop": {
-        "source": "ids",
-        "item": "id",
-        "steps": [
-          {
-            "collect": {
-              "source": "id",
-              "into": {
-                "movie": {
-                  "title": "['xp_text', './data//id']",
-                  "tagline": "['xp_text', './data//number']"
-                }
-              }
-            }
-          }
-        ]
       }
     },
     {
-        "retval": {
-          "source": "movie"          
-        }
+      "retval": {
+        "source": "data_array"
+      }
     }
   ]
 }
