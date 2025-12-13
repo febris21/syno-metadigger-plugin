@@ -9,7 +9,7 @@
     },
     {
       "http": {
-        "url": "https://metadigger.zhanghao.org.cn/v1/movies/search/{title}",
+        "url": "https://metadigger.zhanghao.org.cn/v2/movies/search/{title}",
         "method": "GET",
         "headers": {
           "Host": "metadigger.zhanghao.org.cn",

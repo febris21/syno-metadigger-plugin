@@ -147,8 +147,7 @@ def _regex_match(strategy: str, expr: str, source: str):
 def _regex_extension(strategy: str, expr: str, source: str):
     """Match strings in a source string using regex."""
     if strategy == "digger":
-        json_body = json.loads(source)
-        json_data = json_body
+        json_data = json.loads(source)
         movies = []
         item = json_data
         dt = datetime.strptime(item['release_date'], "%Y-%m-%dT%H:%M:%SZ")
