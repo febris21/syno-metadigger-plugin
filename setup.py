@@ -18,7 +18,7 @@ INFO_TMPL = """
   "id": "${plugin_id}-${version}",
   "entry_file": "run.sh",
   "type": ["movie", "tvshow"],
-  "language": ["chs"],
+  "language": ["jpn"],
   "test_example": {
     "movie": {
       "title": "--install"

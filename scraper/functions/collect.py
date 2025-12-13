@@ -158,7 +158,7 @@ def _regex_extension(strategy: str, expr: str, source: str):
                 'original_available': dt.strftime("%Y-%m-%d"),
                 'summary': item['title'],
                 "certificate": "",
-                "genre": "",
+                "genre": [],
                 "actor": item['actors'],
                 "writer": [],
                 "director": [],
