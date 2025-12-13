@@ -17,19 +17,11 @@ INFO_TMPL = """
 {
   "id": "${plugin_id}-${version}",
   "entry_file": "run.sh",
-  "type": ["movie", "tvshow"],
+  "type": ["movie"],
   "language": ["jpn"],
   "test_example": {
     "movie": {
       "title": "--install"
-    },
-    "tvshow": {
-      "title": "--install"
-    },
-    "tvshow_episode": {
-      "title": "--install",
-      "season": 1,
-      "episode": 1
     }
   }
 }
