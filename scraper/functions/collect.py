@@ -148,31 +148,33 @@ def _regex_extension(strategy: str, expr: str, source: str):
     """Match strings in a source string using regex."""
     if strategy == "digger":
         json_body = json.loads(source)
-        json_data = json_body['data']
+        json_data = json_body
         movies = []
-        for item in json_data:
-            dt = datetime.fromisoformat(item['release_date'].replace("Z", "+00:00"))
-            movie = {
-                'title': item['title'],
-                'tagline': item['id'],
-                'original_available': dt.strftime("%Y-%m-%d"),
-                'summary': item['title'],
-                "certificate": "",
-                "genre": [],
-                "actor": item['actors'],
-                "writer": [],
-                "director": [],
-                "extra": {
-                    "[plugin_id]": {
-                        "rating": {
-                            "[plugin_id]": item['score']
-                        },
-                        "poster": item['thumb_url'],
-                        "backdrop": item['cover_url']
-                    }
+        item = json_data
+        dt = datetime.strptime(item['release_date'], "%Y-%m-%dT%H:%M:%SZ")
+        summary = item['title'] + item['summary']
+        movie = {
+            'title': item['number'],
+            'tagline': item['maker'],
+            'original_available': dt.strftime("%Y-%m-%d"),
+            'summary': summary,
+            "certificate": "",
+            "genre": item['genres'],
+            "actor": item['actors'],
+            "writer": [],
+            "director": item['director'],
+            "extra": {
+                "[plugin_id]": {
+                    "rating": {
+                        "[plugin_id]": item['score']
+                    },
+                    "poster": item['thumb_url'],
+                    "backdrop": item['cover_url']
                 }
             }
-            movies.append(movie)
+        }
+        movies.append(movie)
+
         return list(movies)
     elif strategy == "none":
         return "none"
