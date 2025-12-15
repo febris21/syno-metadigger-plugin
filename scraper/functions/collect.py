@@ -152,6 +152,10 @@ def _regex_extension(strategy: str, expr: str, source: str):
         item = json_data
         dt = datetime.strptime(item['release_date'], "%Y-%m-%dT%H:%M:%SZ")
         summary = item['title'] + item['summary']
+        poster = []
+        poster.append(item['thumb_url'])
+        backdrop = []
+        backdrop.append(item['cover_url'])
         movie = {
             'title': item['number'],
             'tagline': item['maker'],
@@ -167,8 +171,8 @@ def _regex_extension(strategy: str, expr: str, source: str):
                     "rating": {
                         "[plugin_id]": item['score']
                     },
-                    "poster": item['thumb_url'],
-                    "backdrop": item['cover_url']
+                    "poster": poster,
+                    "backdrop": backdrop
                 }
             }
         }
