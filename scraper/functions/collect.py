@@ -158,7 +158,7 @@ def _regex_extension(strategy: str, expr: str, source: str):
         backdrop.append(item['cover_url'])
         tagline = item['number'].replace("-", " ")
         movie = {
-            'title': item['number'],
+            'title': tagline,
             'tagline': tagline,
             'original_available': dt.strftime("%Y-%m-%d"),
             'summary': summary,
