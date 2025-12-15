@@ -156,10 +156,7 @@ def _regex_extension(strategy: str, expr: str, source: str):
         poster.append(item['thumb_url'])
         backdrop = []
         backdrop.append(item['cover_url'])
-<<<<<<< HEAD
-=======
         tagline = item['number'].replace("-", " ")
->>>>>>> 876ec6d (update)
         movie = {
             'title': item['number'],
             'tagline': tagline,
