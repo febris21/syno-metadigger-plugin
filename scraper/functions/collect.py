@@ -154,12 +154,14 @@ def _regex_extension(strategy: str, expr: str, source: str):
         summary = item['title'] + item['summary']
         poster = []
         poster.append(item['thumb_url'])
+        for img in item['preview_images']:
+            poster.append(img)            
+            
         backdrop = []
-        backdrop.append(item['cover_url'])
-        tagline = item['number'].replace("-", " ")
+        backdrop.append(item['cover_url'])        
         movie = {
-            'title': tagline,
-            'tagline': tagline,
+            'title': item['number'],
+            'tagline': item['number'],
             'original_available': dt.strftime("%Y-%m-%d"),
             'summary': summary,
             "certificate": "",
